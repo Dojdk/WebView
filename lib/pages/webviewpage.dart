@@ -52,11 +52,20 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Web View'),
-          actions: [NavigationControls(controller: controller)],
-        ),
-        body: WebViewWidget(controller: controller));
+    return WillPopScope(
+      onWillPop: () => controller.canGoBack().then((value) {
+        if (value) {
+          controller.goBack();
+          return Future.value(false);
+        }
+        return Future.value(true);
+      }),
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Web View'),
+            actions: [NavigationControls(controller: controller)],
+          ),
+          body: WebViewWidget(controller: controller)),
+    );
   }
 }
