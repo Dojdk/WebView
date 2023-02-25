@@ -14,19 +14,37 @@ class SportInfoScreen extends StatelessWidget {
     final sportName = ModalRoute.of(context)!.settings.arguments as String;
     final sport = Provider.of<SportProvider>(context).findByName(sportName);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('${sport.name} Facts'),
+        body: Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/background.jpg'),
+              fit: BoxFit.cover)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: sport.achievements.length + 1,
+          itemBuilder: (context, index) {
+            return index == 0
+                ? Row(
+                    children: [
+                      IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.arrow_back_ios)),
+                      Text(
+                        '${sport.name} Achievements',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  )
+                : AchievementListItem(
+                    achievement: sport.achievements[index - 1],
+                  );
+          },
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-            itemCount: sport.achievements.length,
-            itemBuilder: (context, index) {
-              return AchievementListItem(
-                achievement: sport.achievements[index],
-              );
-            },
-          ),
-        ));
+      ),
+    ));
   }
 }

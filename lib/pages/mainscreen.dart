@@ -14,20 +14,27 @@ class MainScreen extends StatelessWidget {
     final sportData = Provider.of<SportProvider>(context).sportData;
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: sportData.length,
+            itemBuilder: (context, index) {
+              return GridItem(
+                imageUrl: sportData[index].imageUrl,
+                name: sportData[index].name,
+              );
+            },
           ),
-          itemCount: sportData.length,
-          itemBuilder: (context, index) {
-            return GridItem(
-              name: sportData[index].name,
-            );
-          },
         ),
       ),
     );

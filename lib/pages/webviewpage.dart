@@ -14,53 +14,20 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  late final controller = WebViewController()
+  late final _controller = WebViewController()
     ..loadRequest(Uri.parse(widget.url));
-
-  @override
-  void initState() {
-    super.initState();
-    controller
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onNavigationRequest: (navigation) {
-            final host = Uri.parse(navigation.url).host;
-            if (host.contains('youtube.com')) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Blocking navigation to $host',
-                  ),
-                ),
-              );
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..addJavaScriptChannel(
-        'SnackBar',
-        onMessageReceived: (message) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(message.message)));
-        },
-      );
-  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => controller.canGoBack().then((value) {
-        if (value) {
-          controller.goBack();
-          return Future.value(false);
+      onWillPop: () async {
+        if (await _controller.canGoBack()) {
+          _controller.goBack();
         }
-        return Future.value(true);
-      }),
+        return false;
+      },
       child: Scaffold(
-          body: SafeArea(child: WebViewWidget(controller: controller))),
+          body: SafeArea(child: WebViewWidget(controller: _controller))),
     );
   }
 }

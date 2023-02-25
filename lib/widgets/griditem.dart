@@ -3,7 +3,8 @@ import 'package:webview/pages/sportinfoscreen.dart';
 
 class GridItem extends StatelessWidget {
   final String name;
-  const GridItem({super.key, required this.name});
+  final String imageUrl;
+  const GridItem({super.key, required this.name, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +13,21 @@ class GridItem extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(SportInfoScreen.routeName, arguments: name);
       },
-      child: Container(
-        decoration: BoxDecoration(
+      child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey,
-        ),
-        child: Center(
-            child: Text(
-          name,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        )),
-      ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.network(imageUrl, fit: BoxFit.cover),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(name,
+                      style: TextStyle(
+                          color: Colors.purple[700],
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700))),
+            ],
+          )),
     );
   }
 }

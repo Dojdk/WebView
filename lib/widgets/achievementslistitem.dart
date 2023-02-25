@@ -14,7 +14,6 @@ class AchievementListItem extends StatelessWidget {
       margin: const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.grey,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

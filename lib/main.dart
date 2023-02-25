@@ -13,26 +13,12 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await OneSignal.shared.setAppId('fc3b6b4d-4e17-48fa-90f4-5b37f9c879ef');
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-
-    OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
-    OneSignal.shared.setAppId('fc3b6b4d-4e17-48fa-90f4-5b37f9c879ef');
-    OneSignal.shared
-        .promptUserForPushNotificationPermission(fallbackToSettings: true);
-  }
 
   Future<String?> getLinks() async {
     final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
