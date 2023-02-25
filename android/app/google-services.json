@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "519263686288",
-    "project_id": "webview-cb8b6",
-    "storage_bucket": "webview-cb8b6.appspot.com"
+    "project_number": "792685408856",
+    "project_id": "salei-d0133",
+    "storage_bucket": "salei-d0133.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:519263686288:android:247a89c116416f82a1d215",
+        "mobilesdk_app_id": "1:792685408856:android:32165be110a60ccf1fd02d",
         "android_client_info": {
-          "package_name": "com.example.webview"
+          "package_name": "leonbets.bk.leon.bkleon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "519263686288-tcktfmud9hqkh3pffau7h2cuhqh292ea.apps.googleusercontent.com",
+          "client_id": "792685408856-kp3fpictjibu40m36t695bvdldi3gpjn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6UYPVfPNiLqaxsDR4CVuREQCRAVx_tdg"
+          "current_key": "AIzaSyAuPkMnKHASpbUAFRUgHZFpMZmEJpOxLoo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "519263686288-tcktfmud9hqkh3pffau7h2cuhqh292ea.apps.googleusercontent.com",
+              "client_id": "792685408856-kp3fpictjibu40m36t695bvdldi3gpjn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

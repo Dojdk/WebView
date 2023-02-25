@@ -4,10 +4,11 @@ import 'package:webview/pages/sportinfoscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:webview/pages/webviewpage.dart';
 import 'providers/sportprovider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,17 +16,29 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  Future<String> getLinks() async {
-    var firestore = FirebaseFirestore.instance;
-    String url = "";
-    await firestore
-        .collection("links")
-        .get()
-        .then((value) => url = value.docs.first.data().values.first.toString());
-    return url;
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState()  {
+    super.initState();
+
+    OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
+    OneSignal.shared.setAppId('fc3b6b4d-4e17-48fa-90f4-5b37f9c879ef');
+    OneSignal.shared
+        .promptUserForPushNotificationPermission(fallbackToSettings: true);
+  }
+
+  Future<String?> getLinks() async {
+    final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.fetchAndActivate();
+    final String url = remoteConfig.getString('url');
+    return url.trim() == '' ? null : url;
   }
 
   Future<void> savelinks(String url) async {
