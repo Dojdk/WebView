@@ -13,21 +13,22 @@ class GridItem extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(SportInfoScreen.routeName, arguments: name);
       },
-      child: ClipRRect(
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Stack(
-            fit: StackFit.expand,
             children: [
               Image.network(imageUrl, fit: BoxFit.cover),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(name,
-                      style: TextStyle(
-                          color: Colors.purple[700],
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700))),
+              Text(name,
+                  style: TextStyle(
+                      color: Colors.purple[700],
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700)),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

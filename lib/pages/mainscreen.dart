@@ -20,13 +20,8 @@ class MainScreen extends StatelessWidget {
                 image: AssetImage('assets/images/background.jpg'),
                 fit: BoxFit.cover)),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
+          padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
+          child: ListView.builder(
             itemCount: sportData.length,
             itemBuilder: (context, index) {
               return GridItem(

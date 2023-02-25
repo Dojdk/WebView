@@ -20,7 +20,7 @@ class SportInfoScreen extends StatelessWidget {
               image: AssetImage('assets/images/background.jpg'),
               fit: BoxFit.cover)),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
         child: ListView.builder(
           itemCount: sport.achievements.length + 1,
           itemBuilder: (context, index) {
