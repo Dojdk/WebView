@@ -8,26 +8,38 @@ class WebViewPage extends StatefulWidget {
     super.key,
     required this.url,
   });
-
   @override
   State<WebViewPage> createState() => _WebViewPageState();
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  late final _controller = WebViewController()
-    ..loadRequest(Uri.parse(widget.url));
+  late final controller = WebViewController()
+    ..loadRequest(Uri.parse(Uri.encodeFull(widget.url)));
+  @override
+  void initState() {
+    super.initState();
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..addJavaScriptChannel(
+        'SnackBar',
+        onMessageReceived: (message) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(message.message)));
+        },
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (await _controller.canGoBack()) {
-          _controller.goBack();
+        if (await controller.canGoBack()) {
+          controller.goBack();
         }
         return false;
       },
       child: Scaffold(
-          body: SafeArea(child: WebViewWidget(controller: _controller))),
+          body: SafeArea(child: WebViewWidget(controller: controller))),
     );
   }
 }
