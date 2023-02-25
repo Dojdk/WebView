@@ -25,7 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState()  {
+  void initState() {
     super.initState();
 
     OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
             );
           }
           if (snapshot.hasData) {
-            if (!snapshot.data!) {
+            if (snapshot.data!) {
               return const MainScreen();
             }
           }

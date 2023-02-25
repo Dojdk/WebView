@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:webview/controllers/navigationcontroller.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -61,11 +60,7 @@ class _WebViewPageState extends State<WebViewPage> {
         return Future.value(true);
       }),
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Web View'),
-            actions: [NavigationControls(controller: controller)],
-          ),
-          body: WebViewWidget(controller: controller)),
+          body: SafeArea(child: WebViewWidget(controller: controller))),
     );
   }
 }
